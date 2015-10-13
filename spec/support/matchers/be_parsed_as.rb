@@ -73,9 +73,10 @@ RSpec::Matchers.define :be_parsed_as do |scope|
   end
 
   def extract_result!(result)
-    children = Nokogiri::XML(result).root.children
+    root = Nokogiri::XML(result).root
+    children = root.children
     node = children.find { |e| e.element? && e.name == scope }
-    node ||= children.find(&:element?)
+    node ||= children.find(&:element?) || root
 
     @parsed_scope = node.name
     @parsed_code_extract = node.content

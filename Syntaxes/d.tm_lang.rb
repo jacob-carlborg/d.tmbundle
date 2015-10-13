@@ -1,3 +1,5 @@
+import 'rules/integer_literal'
+
 grammar 'source.d' do
   comment 'D language'
   file_types %w(d di)
@@ -10,4 +12,6 @@ grammar 'source.d' do
     name 'support.other.identifier.d'
     match '[_\p{L}](?:[_\p{L}\d])*'
   end
+
+  mixin :integer_literal
 end
