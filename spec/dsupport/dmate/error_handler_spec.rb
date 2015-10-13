@@ -13,7 +13,7 @@ describe DMate::ErrorHandler do
 
     context 'when not in a project' do
       before :each do
-        allow(TextMate).to receive(:project?).and_return(false)
+        TextMate.stub(:project?).and_return(false)
       end
 
       context 'when the given value is a module name' do
@@ -23,7 +23,7 @@ describe DMate::ErrorHandler do
 
         context 'and original module name exists' do
           before :each do
-            expect(File).to receive(:exist?).once.and_return(true)
+            File.should_receive(:exist?).once.and_return(true)
           end
 
           it 'returns the given path unchanged' do
@@ -39,7 +39,7 @@ describe DMate::ErrorHandler do
 
         context 'and original path exists' do
           before :each do
-            expect(File).to receive(:exist?).once.and_return(true)
+            File.should_receive(:exist?).once.and_return(true)
           end
 
           it 'returns the given path unchanged' do
@@ -53,8 +53,8 @@ describe DMate::ErrorHandler do
       let(:project_path) { '/foo/bar' }
 
       before :each do
-        allow(TextMate).to receive(:project?).and_return(true)
-        allow(TextMate).to receive(:project_path).and_return(project_path)
+        TextMate.stub(:project?).and_return(true)
+        TextMate.stub(:project_path).and_return(project_path)
       end
 
       context 'when the given value is module name' do
@@ -64,7 +64,7 @@ describe DMate::ErrorHandler do
 
         context 'and original module name exists' do
           before :each do
-            expect(File).to receive(:exist?).once.and_return(true)
+            File.should_receive(:exist?).once.and_return(true)
           end
 
           it 'returns the given path unchanged' do
@@ -80,7 +80,7 @@ describe DMate::ErrorHandler do
 
         context 'and original path exists' do
           before :each do
-            expect(File).to receive(:exist?).once.and_return(true)
+            File.should_receive(:exist?).once.and_return(true)
           end
 
           it 'returns the given path unchanged' do
