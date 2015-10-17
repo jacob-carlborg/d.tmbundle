@@ -1,4 +1,9 @@
 trait :integer_literal do
+  rule 'integer_suffix' do
+    name 'support.other.integer-suffix.d'
+    match /(?:Lu|LU|uL|UL|L|u|U)/
+  end
+
   rule 'bin_prefix' do
     name 'support.other.bin-prefix.d'
     match /0(?:b|B)/

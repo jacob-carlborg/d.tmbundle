@@ -1,6 +1,39 @@
 require 'spec_helper'
 
 describe 'integer_literal' do
+  describe 'integer_suffix' do
+    let(:rule) { 'integer_suffix' }
+    let(:scope) { 'support.other.integer-suffix.d' }
+
+    describe 'L' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'u' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'U' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'Lu' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'LU' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'uL' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'UL' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'bin_prefix' do
     let(:rule) { 'bin_prefix' }
     let(:scope) { 'support.other.bin-prefix.d' }
