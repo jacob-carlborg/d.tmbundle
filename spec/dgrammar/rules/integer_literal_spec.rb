@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe 'integer_literal' do
+  describe 'bin_prefix' do
+    let(:rule) { 'bin_prefix' }
+    let(:scope) { 'support.other.bin-prefix.d' }
+
+    describe '0b' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0B' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'non_zero_digit' do
     let(:rule) { 'non_zero_digit' }
     let(:scope) { 'support.other.non-zero-digit.d' }
