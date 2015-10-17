@@ -62,4 +62,21 @@ describe 'integer_literal' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'binary_digit' do
+    let(:rule) { 'binary_digit' }
+    let(:scope) { 'support.other.binary-digit.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '1' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '5' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
