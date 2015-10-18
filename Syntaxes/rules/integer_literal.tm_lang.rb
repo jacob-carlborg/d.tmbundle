@@ -24,6 +24,11 @@ trait :integer_literal do
     match { `0` | non_zero_digit }
   end
 
+  rule 'decimal_digit_us' do
+    name 'support.other.decimal-digit-us.d'
+    match { decimal_digit | `_` }
+  end
+
   rule 'binary_digit' do
     name 'support.other.binary-digit.d'
     match /0|1/
