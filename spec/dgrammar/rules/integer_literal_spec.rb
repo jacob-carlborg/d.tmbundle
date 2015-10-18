@@ -113,6 +113,35 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'decimal_digits_us' do
+    let(:rule) { 'decimal_digits_us' }
+    let(:scope) { 'support.other.decimal-digits-us.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '5' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0123456789' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '4567865678938302' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '012_3456_789' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_45678_65678938_302_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'decimal_digit' do
     let(:rule) { 'decimal_digit' }
     let(:scope) { 'support.other.decimal-digit.d' }
