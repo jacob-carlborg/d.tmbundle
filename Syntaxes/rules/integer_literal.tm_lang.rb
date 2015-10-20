@@ -43,4 +43,9 @@ trait :integer_literal do
     name 'support.other.binary-digit.d'
     match /0|1/
   end
+
+  rule 'binary_digit_us' do
+    name 'support.other.binary-digit-us.d'
+    match { binary_digit | `_` }
+  end
 end
