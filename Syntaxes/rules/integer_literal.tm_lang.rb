@@ -39,6 +39,11 @@ trait :integer_literal do
     match { decimal_digit | `_` }
   end
 
+  rule 'binary_digits_us' do
+    name 'support.other.binary-digits-us.d'
+    match { binary_digit_us + zero_or_more(binary_digit_us) }
+  end
+
   rule 'binary_digit' do
     name 'support.other.binary-digit.d'
     match /0|1/

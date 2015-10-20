@@ -205,6 +205,35 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'binary_digits_us' do
+    let(:rule) { 'binary_digits_us' }
+    let(:scope) { 'support.other.binary-digits-us.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '1' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '11010' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_11010' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_11_010_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'binary_digit' do
     let(:rule) { 'binary_digit' }
     let(:scope) { 'support.other.binary-digit.d' }
