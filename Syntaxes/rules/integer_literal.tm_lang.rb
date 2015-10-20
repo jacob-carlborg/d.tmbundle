@@ -63,4 +63,9 @@ trait :integer_literal do
     name 'support.other.hex-prefix.d'
     match /0(?:x|X)/
   end
+
+  rule 'hex_letter' do
+    name 'support.other.hex-letter.d'
+    match /[abcdefABCDEF_]/
+  end
 end
