@@ -34,6 +34,31 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'decimal_integer' do
+    let(:rule) { 'decimal_integer' }
+    let(:scope) { 'support.other.decimal-integer.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '2' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '52738' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '527_38_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_52738' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'bin_prefix' do
     let(:rule) { 'bin_prefix' }
     let(:scope) { 'support.other.bin-prefix.d' }

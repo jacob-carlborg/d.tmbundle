@@ -4,6 +4,11 @@ trait :integer_literal do
     match /(?:Lu|LU|uL|UL|L|u|U)/
   end
 
+  rule 'decimal_integer' do
+    name 'support.other.decimal-integer.d'
+    match { `0` | non_zero_digit + optional(decimal_digits_us) }
+  end
+
   rule 'bin_prefix' do
     name 'support.other.bin-prefix.d'
     match /0(?:b|B)/
