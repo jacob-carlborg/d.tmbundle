@@ -9,6 +9,11 @@ trait :integer_literal do
     match { `0` | non_zero_digit + optional(decimal_digits_us) }
   end
 
+  rule 'binary_integer' do
+    name 'constant.numeric.integer.binary.d'
+    match { bin_prefix + binary_digits_us }
+  end
+
   rule 'bin_prefix' do
     name 'support.other.bin-prefix.d'
     match /0(?:b|B)/
