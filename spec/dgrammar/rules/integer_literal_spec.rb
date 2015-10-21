@@ -1,6 +1,29 @@
 require 'spec_helper'
 
 describe 'integer_literal' do
+  let(:rule) { 'integer_literal' }
+  let(:scope) { 'constant.numeric.integer.d' }
+
+  describe '0' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '328_284L' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '0x827ad_bce49u' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '0b1010_110101UL' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '328_284Lu' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
   describe 'integer' do
     let(:rule) { 'integer' }
     let(:scope) { 'support.other.integer.d' }

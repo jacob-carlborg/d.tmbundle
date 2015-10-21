@@ -1,4 +1,9 @@
 trait :integer_literal do
+  rule 'integer_literal' do
+    name 'constant.numeric.integer.d'
+    match { integer + optional(integer_suffix) }
+  end
+
   rule 'integer' do
     name 'support.other.integer.d'
     match { binary_integer | hexadecimal_integer | decimal_integer }
