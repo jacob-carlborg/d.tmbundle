@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe 'integer_literal' do
+  describe 'integer' do
+    let(:rule) { 'integer' }
+    let(:scope) { 'support.other.integer.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '328_284' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0x827ad_bce49' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0b1010_110101' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'integer_suffix' do
     let(:rule) { 'integer_suffix' }
     let(:scope) { 'support.other.integer-suffix.d' }
