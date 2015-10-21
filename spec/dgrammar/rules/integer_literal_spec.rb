@@ -334,6 +334,27 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'hex_digits' do
+    let(:rule) { 'hex_digits' }
+    let(:scope) { 'support.other.hex-digits.d' }
+
+    describe '03948' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'afb' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'abcdef_ABCDEF_0123456789' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_92_bcd_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'hex_digit' do
     let(:rule) { 'hex_digit' }
     let(:scope) { 'support.other.hex-digit.d' }
