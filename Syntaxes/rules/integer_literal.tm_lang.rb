@@ -69,6 +69,11 @@ trait :integer_literal do
     match { one_or_more(hex_digit) }
   end
 
+  rule 'hex_digits_us' do
+    name 'support.other.hex-digits-us.d'
+    match { one_or_more(hex_digits) }
+  end
+
   rule 'hex_digit' do
     name 'support.other.hex-digit.d'
     match { decimal_digit | hex_letter }
