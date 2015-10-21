@@ -19,6 +19,11 @@ trait :integer_literal do
     match /0(?:b|B)/
   end
 
+  rule 'hexadecimal_integer' do
+    name 'constant.numeric.integer.hexadecimal.d'
+    match { hex_prefix + hex_digits_no_single_us }
+  end
+
   rule 'non_zero_digit' do
     name 'support.other.non-zero-digit.d'
     match '[123456789]'
@@ -72,6 +77,11 @@ trait :integer_literal do
   rule 'hex_digits_us' do
     name 'support.other.hex-digits-us.d'
     match { one_or_more(hex_digits) }
+  end
+
+  rule 'hex_digits_no_single_us' do
+    name 'support.other.hex-digits-no-single-us.d'
+    match { hex_digits_us }
   end
 
   rule 'hex_digit' do

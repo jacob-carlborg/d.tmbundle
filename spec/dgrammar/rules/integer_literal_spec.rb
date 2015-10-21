@@ -125,6 +125,51 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'hexadecimal_integer' do
+    let(:rule) { 'hexadecimal_integer' }
+    let(:scope) { 'constant.numeric.integer.hexadecimal.d' }
+
+    describe '0x' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0X' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0x_0123456789_abcdef_ABCDEF_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0x1' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0xc' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0xa79bc89de' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0X_0123456789_abcdef_ABCDEF_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0X1' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0Xc' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0Xa79bc89de' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'non_zero_digit' do
     let(:rule) { 'non_zero_digit' }
     let(:scope) { 'support.other.non-zero-digit.d' }
