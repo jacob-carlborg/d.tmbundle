@@ -74,6 +74,11 @@ trait :integer_literal do
     match { decimal_digit | hex_letter }
   end
 
+  rule 'hex_digit_us' do
+    name 'support.other.hex-digit-us.d'
+    match { hex_digit }
+  end
+
   rule 'hex_letter' do
     name 'support.other.hex-letter.d'
     match /[abcdefABCDEF_]/
