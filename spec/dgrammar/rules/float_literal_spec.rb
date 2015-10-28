@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'imaginary_suffix' do
+    let(:rule) { 'imaginary_suffix' }
+    let(:scope) { 'support.other.imaginary-suffix.d' }
+
+    describe 'i' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'leading_decimal' do
     let(:rule) { 'leading_decimal' }
     let(:scope) { 'support.other.leading-decimal.d' }
