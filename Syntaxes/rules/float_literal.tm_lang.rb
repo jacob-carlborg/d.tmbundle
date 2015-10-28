@@ -1,4 +1,9 @@
 trait :float_literal do
+  rule 'float_suffix' do
+    name 'support.other.float-suffix.d'
+    match /f|F/
+  end
+
   rule 'real_suffix' do
     name 'support.other.real-suffix.d'
     match /L/

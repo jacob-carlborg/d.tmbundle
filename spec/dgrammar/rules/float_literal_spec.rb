@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'float_suffix' do
+    let(:rule) { 'float_suffix' }
+    let(:scope) { 'support.other.float-suffix.d' }
+
+    describe 'f' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'F' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'real_suffix' do
     let(:rule) { 'real_suffix' }
     let(:scope) { 'support.other.real-suffix.d' }
