@@ -1,6 +1,39 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'suffix' do
+    let(:rule) { 'suffix' }
+    let(:scope) { 'support.other.suffix.d' }
+
+    describe 'f' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'F' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'L' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'i' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'fi' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'Fi' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'Li' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'float_suffix' do
     let(:rule) { 'float_suffix' }
     let(:scope) { 'support.other.float-suffix.d' }
