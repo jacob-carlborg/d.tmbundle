@@ -39,6 +39,15 @@ trait :integer_literal do
     match '[123456789]'
   end
 
+  rule 'decimal_digits_no_single_us' do
+    name 'support.other.decimal-digits-no-single-us.d'
+    match do
+        decimal_digit + decimal_digits_us |
+          decimal_digits_us + decimal_digit |
+          decimal_digit
+    end
+  end
+
   rule 'decimal_digits' do
     name 'support.other.decimal-digits.d'
     match { decimal_digit + zero_or_more(decimal_digit) }
