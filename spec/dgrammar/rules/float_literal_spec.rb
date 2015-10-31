@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'decimal_exponent' do
+    let(:rule) { 'decimal_exponent' }
+    let(:scope) { 'support.other.decimal-exponent.d' }
+
+    describe 'e0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'E+012_3456_789' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'e-_1' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'e_' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'decimal_exponent_start' do
     let(:rule) { 'decimal_exponent_start' }
     let(:scope) { 'support.other.decimal-exponent-start.d' }
