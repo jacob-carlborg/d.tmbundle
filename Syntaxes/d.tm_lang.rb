@@ -1,5 +1,6 @@
 import 'rules/integer_literal'
 import 'rules/float_literal'
+import 'rules/string_literal'
 
 grammar 'source.d' do
   comment 'D language'
@@ -16,4 +17,5 @@ grammar 'source.d' do
 
   mixin :integer_literal
   mixin :float_literal
+  mixin :string_literal
 end
