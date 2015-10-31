@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'hex_float' do
+    let(:rule) { 'hex_float' }
+    let(:scope) { 'constant.numeric.float.hex.d' }
+
+    describe '0xaf_ABF_0189.0_92_bcd_p283' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0X.0_92_bcd_p28' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0xaf_ABF_0189P+298' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'hex_prefix' do
     let(:rule) { 'hex_prefix' }
     let(:scope) { 'support.other.hex-prefix.d' }

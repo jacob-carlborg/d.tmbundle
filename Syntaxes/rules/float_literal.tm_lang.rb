@@ -1,4 +1,16 @@
 trait :float_literal do
+  rule 'hex_float' do
+    name 'constant.numeric.float.hex.d'
+
+    match do
+      hex_prefix + hex_digits_no_single_us + /\./ + hex_digits_no_starting_us +
+        hex_exponent |
+
+      hex_prefix + /\./ + hex_digits_no_starting_us + hex_exponent |
+      hex_prefix + hex_digits_no_single_us + hex_exponent
+    end
+  end
+
   rule 'hex_prefix' do
     name 'support.other.hex-prefix.d'
     match /0[xX]/
