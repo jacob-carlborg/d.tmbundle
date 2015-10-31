@@ -1,4 +1,9 @@
 trait :float_literal do
+  rule 'hex_exponent_start' do
+    name 'support.other.hex-exponent-start.d'
+    match /[pP][+-]?/
+  end
+
   rule 'suffix' do
     name 'support.other.suffix.d'
     match do

@@ -1,6 +1,35 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'hex_exponent_start' do
+    let(:rule) { 'hex_exponent_start' }
+    let(:scope) { 'support.other.hex-exponent-start.d' }
+
+    describe 'p' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'P' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'p+' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'P+' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'p-' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'P-' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'suffix' do
     let(:rule) { 'suffix' }
     let(:scope) { 'support.other.suffix.d' }
