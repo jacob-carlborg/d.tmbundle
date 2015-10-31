@@ -1,4 +1,15 @@
 trait :float_literal do
+  rule 'decimal_float' do
+    name 'support.other.decimal-float.d'
+
+    match do
+      decimal_digits + /\./ + decimal_digits_no_starting_us + decimal_exponent |
+      leading_decimal + /\./ + optional(decimal_digits) |
+      `\\.` + decimal_integer + optional(decimal_exponent) |
+      leading_decimal + decimal_exponent
+    end
+  end
+
   rule 'decimal_exponent' do
     name 'support.other.decimal-exponent.d'
     match { decimal_exponent_start + decimal_digits_no_single_us }

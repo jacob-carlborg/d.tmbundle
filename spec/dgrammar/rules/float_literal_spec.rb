@@ -1,6 +1,39 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'decimal_float' do
+    let(:rule) { 'decimal_float' }
+    let(:scope) { 'support.other.decimal-float.d' }
+
+    describe '0.' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '1_.' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0.238947' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0.2_45678_65678938_302_e+3894' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '.2' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '.4E+8' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '2e-18_203' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'decimal_exponent' do
     let(:rule) { 'decimal_exponent' }
     let(:scope) { 'support.other.decimal-exponent.d' }
