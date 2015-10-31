@@ -1,4 +1,9 @@
 trait :float_literal do
+  rule 'hex_prefix' do
+    name 'support.other.hex-prefix.d'
+    match /0[xX]/
+  end
+
   rule 'hex_exponent' do
     name 'support.other.hex-exponent.d'
     match { hex_exponent_start + decimal_digits_no_single_us }

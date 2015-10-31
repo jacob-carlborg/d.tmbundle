@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  describe 'hex_prefix' do
+    let(:rule) { 'hex_prefix' }
+    let(:scope) { 'support.other.hex-prefix.d' }
+
+    describe '0x' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0X' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'hex_exponent' do
     let(:rule) { 'hex_exponent' }
     let(:scope) { 'support.other.hex-exponent.d' }
