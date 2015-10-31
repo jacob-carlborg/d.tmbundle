@@ -1,4 +1,9 @@
 trait :float_literal do
+  rule 'decimal_exponent_start' do
+    name 'support.other.decimal-exponent-start.d'
+    match /[eE][+-]?/
+  end
+
   rule 'hex_float' do
     name 'constant.numeric.float.hex.d'
 
