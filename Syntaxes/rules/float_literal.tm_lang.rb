@@ -1,4 +1,9 @@
 trait :float_literal do
+  rule 'float' do
+    name 'support.other.float.d'
+    match { decimal_float | hex_float }
+  end
+
   rule 'decimal_float' do
     name 'support.other.decimal-float.d'
 
