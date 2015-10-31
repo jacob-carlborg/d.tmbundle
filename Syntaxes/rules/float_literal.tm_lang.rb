@@ -1,4 +1,15 @@
 trait :float_literal do
+  rule 'float_literal' do
+    name 'constant.numeric.float.d'
+
+    match do
+      float + optional(suffix) |
+      integer + imaginary_suffix |
+      integer + float_suffix + imaginary_suffix |
+      integer + real_suffix + imaginary_suffix
+    end
+  end
+
   rule 'float' do
     name 'support.other.float.d'
     match { decimal_float | hex_float }

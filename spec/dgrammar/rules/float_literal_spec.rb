@@ -1,6 +1,29 @@
 require 'spec_helper'
 
 describe 'float_literal' do
+  let(:rule) { 'float_literal' }
+  let(:scope) { 'constant.numeric.float.d' }
+
+  describe '0.2_45_658938_302_e-34' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '0.2_45_658938_302_e-34Fi' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '328_284i' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '328_284fi' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
+  describe '328_284Li' do
+    it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+  end
+
   describe 'float' do
     let(:rule) { 'float' }
     let(:scope) { 'support.other.float.d' }
