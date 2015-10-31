@@ -58,6 +58,11 @@ trait :integer_literal do
     match { decimal_digit_us + zero_or_more(decimal_digit_us) }
   end
 
+  rule 'decimal_digits_no_starting_us' do
+    name 'support.other.decimal-digits-no-starting-us.d'
+    match { decimal_digit + optional(decimal_digits_us) }
+  end
+
   rule 'decimal_digit' do
     name 'support.other.decimal-digit.d'
     match { `0` | non_zero_digit }

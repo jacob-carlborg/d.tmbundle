@@ -342,6 +342,31 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'decimal_digits_no_starting_us' do
+    let(:rule) { 'decimal_digits_no_starting_us' }
+    let(:scope) { 'support.other.decimal-digits-no-starting-us.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '5' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '2_45678_65678938_302_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_23' do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'decimal_digit' do
     let(:rule) { 'decimal_digit' }
     let(:scope) { 'support.other.decimal-digit.d' }
