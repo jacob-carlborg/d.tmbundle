@@ -103,6 +103,11 @@ trait :integer_literal do
     match { hex_digits_us }
   end
 
+  rule 'hex_digits_no_starting_us' do
+    name 'support.other.hex-digits-no-starting-us.d'
+    match { hex_digit + optional(hex_digits_us) }
+  end
+
   rule 'hex_digit' do
     name 'support.other.hex-digit.d'
     match { decimal_digit | hex_letter }

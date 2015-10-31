@@ -519,6 +519,31 @@ describe 'integer_literal' do
     end
   end
 
+  describe 'hex_digits_no_starting_us' do
+    let(:rule) { 'hex_digits_no_starting_us' }
+    let(:scope) { 'support.other.hex-digits-no-starting-us.d' }
+
+    describe '0' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'A' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0_92_bcd_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'A_abcdef_ABCDEF_0123456789' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '_ab' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'hex_digit' do
     let(:rule) { 'hex_digit' }
     let(:scope) { 'support.other.hex-digit.d' }
