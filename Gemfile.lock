@@ -67,6 +67,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (~> 4.2.4)
   nokogiri (~> 1.6.6.2)
   pry (~> 0.10.1)
   pry-byebug (~> 3.2.0)

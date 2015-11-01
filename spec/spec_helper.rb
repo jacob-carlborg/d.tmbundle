@@ -1,5 +1,6 @@
 require 'tempfile'
 
+require 'active_support/core_ext/object/blank'
 require 'nokogiri'
 require 'pry'
 
