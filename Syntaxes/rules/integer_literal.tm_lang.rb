@@ -93,6 +93,11 @@ trait :integer_literal do
     match /0(?:x|X)/
   end
 
+  rule 'octal_digit' do
+    name 'support.other.octal-digit.d'
+    match /[01234567]/
+  end
+
   rule 'hex_digits' do
     name 'support.other.hex-digits.d'
     match { one_or_more(hex_digit) }
