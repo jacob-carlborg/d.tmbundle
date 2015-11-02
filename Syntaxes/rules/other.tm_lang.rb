@@ -13,4 +13,9 @@ trait :other do
     name 'support.other.space.d'
     match '[\x{0020}\x{0009}]'
   end
+
+  rule 'named_character_entity' do
+    name 'support.other.named-character-entity.d'
+    match { `&` + identifier + `;` }
+  end
 end
