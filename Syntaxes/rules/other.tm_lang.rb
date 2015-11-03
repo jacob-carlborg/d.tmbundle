@@ -1,4 +1,9 @@
 trait :other do
+  rule 'character' do
+    name 'support.other.character.d'
+    match /./
+  end
+
   rule 'end_of_line' do
     name 'support.other.end-of-line.d'
     match /$/

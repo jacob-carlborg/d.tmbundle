@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe 'other' do
+  describe 'character' do
+    let(:rule) { 'character' }
+    let(:scope) { 'support.other.character.d' }
+
+    describe 'a' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '2' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '☃' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'white_space' do
     let(:rule) { 'white_space' }
     let(:scope) { 'support.other.white-space.d' }
