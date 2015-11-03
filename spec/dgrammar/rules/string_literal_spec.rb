@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe 'string_literal' do
+  describe 'double_quoted_character' do
+    let(:rule) { 'double_quoted_character' }
+    let(:scope) { 'support.other.double-quoted-character.d' }
+
+    describe 'a' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'when the character is an escape sequence' do
+      let(:scope) { 'constant.character.escape.d' }
+
+      describe '\v' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '\UC135a603' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'escape_sequence' do
     let(:rule) { 'escape_sequence' }
     let(:scope) { 'constant.character.escape.d' }
