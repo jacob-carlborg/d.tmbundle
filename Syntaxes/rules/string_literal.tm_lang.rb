@@ -1,4 +1,9 @@
 trait :string_literal do
+  rule 'double_quoted_characters' do
+    name 'support.other.double-quoted-characters.d'
+    match { one_or_more(double_quoted_character) }
+  end
+
   rule 'double_quoted_character' do
     name 'support.other.double-quoted-character.d'
     match { escape_sequence | character }

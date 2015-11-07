@@ -78,12 +78,18 @@ RSpec::Matchers.define :be_parsed_as do |scope|
     node = find_node(children)
     node ||= children.find(&:element?) || root
 
-    @parsed_scope = node.name
+    @parsed_scope = node.text? ? node.parent.name : node.name
     @parsed_code_extract = node.content
   end
 
   def find_node(nodes)
-    node = nodes.find { |e| e.element? && e.name == scope }
+    parent_match = -> (e) { e.element? && e.name == scope }
+    child_match = -> (e) { e.text? && e.text == subject }
+
+    node = nodes.flat_map(&:children).find do |e|
+      parent_match.call(e.parent) && child_match.call(e)
+    end
+
     node || find_node_among_children(nodes)
   end
 

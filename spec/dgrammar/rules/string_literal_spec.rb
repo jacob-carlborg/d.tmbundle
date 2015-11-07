@@ -1,6 +1,55 @@
 require 'spec_helper'
 
 describe 'string_literal' do
+  describe 'double_quoted_characters' do
+    let(:rule) { 'double_quoted_characters' }
+    let(:scope) { 'support.other.double-quoted-characters.d' }
+
+    describe 'acasbe' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'when the characters are escape sequences' do
+      let(:scope) { 'constant.character.escape.d' }
+      let(:code) { '\v\UC135a603' }
+
+      describe '\v' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '\UC135a603' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'when the character are mixed letters an escape sequence' do
+      let(:code) { 'foo\vbar\UC135a603asd' }
+      let(:scope) { 'support.other.double-quoted-character.d' }
+
+      describe 'foo' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe '\v' do
+        let(:scope) { 'constant.character.escape.d' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'bar' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe '\UC135a603' do
+        let(:scope) { 'constant.character.escape.d' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'asd' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'double_quoted_character' do
     let(:rule) { 'double_quoted_character' }
     let(:scope) { 'support.other.double-quoted-character.d' }
