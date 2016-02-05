@@ -1,4 +1,16 @@
 trait :string_literal do
+  rule 'double_quoted_string' do
+    name 'string.quoted.double.d'
+
+    self.begin '"'
+    self.end { `"` + string_postfix? }
+
+    begin_capture 0, 'punctuation.definition.string.begin.d'
+    end_capture 0, 'punctuation.definition.string.end.d'
+
+    pattern { include '#double_quoted_characters' }
+  end
+
   rule 'double_quoted_characters' do
     name 'support.other.double-quoted-characters.d'
     match { one_or_more(double_quoted_character) }

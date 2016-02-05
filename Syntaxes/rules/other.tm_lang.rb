@@ -1,7 +1,7 @@
 trait :other do
   rule 'character' do
     name 'support.other.character.d'
-    match /./
+    match /[^"]/
   end
 
   rule 'end_of_line' do
