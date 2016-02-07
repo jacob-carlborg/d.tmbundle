@@ -69,4 +69,92 @@ describe 'other' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'keyword' do
+    let(:rule) { 'keyword' }
+
+    context 'language variable' do
+      let(:scope) { 'variable.language.d' }
+
+      describe 'this' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'super' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'language constant' do
+      let(:scope) { 'constant.language.d' }
+
+      describe 'true' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'false' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'null' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'special keywords' do
+      let(:scope) { 'constant.language.d' }
+
+      describe '__FILE__' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '__MODULE__' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '__LINE__' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '__FUNCTION__' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe '__PRETTY_FUNCTION__' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'control keywords' do
+      let(:scope) { 'keyword.control.d' }
+
+      describe 'if' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'type keywords' do
+      let(:scope) { 'storage.type.d' }
+
+      describe 'int' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'modifier keywords' do
+      let(:scope) { 'storage.modifier.d' }
+
+      describe 'final' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'other keywords' do
+      let(:scope) { 'keyword.other.d' }
+
+      describe 'return' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
 end
