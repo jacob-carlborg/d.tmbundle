@@ -95,4 +95,14 @@ trait :string_literal do
     name 'support.other.string-postfix.d'
     match /[cwd]/
   end
+
+  rule 'delimited_string' do
+    name 'string.unquoted.delimited-string.d'
+
+    self.begin '(q)"(.+)'
+    self.end '(?!\G)\2"'
+
+    begin_capture 1, 'punctuation.definition.string.begin.d'
+    end_capture 0, 'punctuation.definition.string.end.d'
+  end
 end

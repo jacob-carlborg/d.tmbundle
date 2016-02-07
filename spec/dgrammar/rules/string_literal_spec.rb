@@ -331,4 +331,34 @@ describe 'string_literal' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'delimited_string' do
+    let(:rule) { 'delimited_string' }
+    let(:scope) { 'string.unquoted.delimited-string.d' }
+
+    describe %(q"foo\nabc\nfoo") do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe %(q"bar\nabc\nbar") do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'when the string is followed by some text' do
+      let(:code) { %(q"foo\nabc\nfoo"def) }
+
+      describe %(q"foo\nabc\nfoo") do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'def' do
+        it { should_not be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+
+    describe '\n' do
+      let(:scope) { 'constant.character.escape.d' }
+      it { should_not be_parsed_as(scope).in_code('q"foo\nfoo"').with_rule(rule) }
+    end
+  end
 end
