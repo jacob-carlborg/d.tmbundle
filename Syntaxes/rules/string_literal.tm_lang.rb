@@ -1,4 +1,20 @@
 trait :string_literal do
+  rule 'wysiwyg_string' do
+    name 'string.regexp.wysiwyg.d'
+
+    self.begin 'r"'
+    self.end { `"` + string_postfix? }
+
+    begin_capture 0, 'punctuation.definition.string.begin.d'
+    end_capture 0, 'punctuation.definition.string.end.d'
+
+    pattern { include '#regular_expression' }
+  end
+
+  rule 'regular_expression' do
+    pattern { include 'source.regexp.python' }
+  end
+
   rule 'alternate_wysiwyg_string' do
     name 'string.quoted.other.alternate-wysiwyg.d'
 
