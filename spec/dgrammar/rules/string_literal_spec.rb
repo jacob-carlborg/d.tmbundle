@@ -1,6 +1,24 @@
 require 'spec_helper'
 
 describe 'string_literal' do
+  describe 'alternate_wysiwyg_string' do
+    let(:rule) { 'alternate_wysiwyg_string' }
+    let(:scope) { 'string.quoted.other.alternate-wysiwyg.d' }
+
+    describe '`acasbe`' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '`acbe`c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '\n' do
+      let(:scope) { 'constant.character.escape.d' }
+      it { should_not be_parsed_as(scope).in_code('`foo\nbar`').with_rule(rule) }
+    end
+  end
+
   describe 'double_quoted_string' do
     let(:rule) { 'double_quoted_string' }
     let(:scope) { 'string.quoted.double.d' }

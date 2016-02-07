@@ -1,4 +1,14 @@
 trait :string_literal do
+  rule 'alternate_wysiwyg_string' do
+    name 'string.quoted.other.alternate-wysiwyg.d'
+
+    self.begin '`'
+    self.end { `\`` + string_postfix? }
+
+    begin_capture 0, 'punctuation.definition.string.begin.d'
+    end_capture 0, 'punctuation.definition.string.end.d'
+  end
+
   rule 'double_quoted_string' do
     name 'string.quoted.double.d'
 
