@@ -53,6 +53,23 @@ describe 'other' do
     end
   end
 
+  describe 'identifier_start' do
+    let(:rule) { 'identifier_start' }
+    let(:scope) { 'support.other.identifier-start.d' }
+
+    describe '_' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'ö' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'named_character_entity' do
     let(:rule) { 'named_character_entity' }
     let(:scope) { 'support.other.named-character-entity.d' }
