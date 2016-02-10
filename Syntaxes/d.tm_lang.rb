@@ -11,11 +11,6 @@ grammar 'source.d' do
   uuid 'D7C3A109-0466-4C28-9ECF-10753300FF46'
   first_line_match '^#!.*\bg?dmd\b.'
 
-  rule 'identifier' do
-    name 'support.other.identifier.d'
-    match '[_\p{L}](?:[_\p{L}\d])*'
-  end
-
   mixin :integer_literal
   mixin :float_literal
   mixin :string_literal

@@ -19,6 +19,11 @@ trait :other do
     match '[\x{0020}\x{0009}]'
   end
 
+  rule 'identifier' do
+    name 'support.other.identifier.d'
+    match { identifier_start + identifier_chars? }
+  end
+
   rule 'identifier_start' do
     name 'support.other.identifier-start.d'
     match '_|\p{L}'
