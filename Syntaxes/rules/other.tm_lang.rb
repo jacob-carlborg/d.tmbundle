@@ -24,6 +24,11 @@ trait :other do
     match '_|\p{L}'
   end
 
+  rule 'identifier_char' do
+    name 'support.other.identifier-char.d'
+    match { identifier_start | `0` | non_zero_digit }
+  end
+
   rule 'named_character_entity' do
     name 'support.other.named-character-entity.d'
     match { `&` + identifier + `;` }
