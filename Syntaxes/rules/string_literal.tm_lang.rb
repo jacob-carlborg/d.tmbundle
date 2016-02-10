@@ -1,4 +1,9 @@
 trait :string_literal do
+  rule 'single_quoted_character' do
+    name 'support.other.single-quoted-character.d'
+    match { escape_sequence | `[^']` }
+  end
+
   rule 'wysiwyg_string' do
     name 'string.regexp.wysiwyg.d'
 

@@ -1,6 +1,28 @@
 require 'spec_helper'
 
 describe 'string_literal' do
+  describe 'single_quoted_character' do
+    let(:rule) { 'single_quoted_character' }
+    let(:scope) { 'support.other.single-quoted-character.d' }
+
+    describe 'a' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'ö' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '"' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '\n' do
+      let(:scope) { 'constant.character.escape.d' }
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'wysiwyg_string' do
     let(:rule) { 'wysiwyg_string' }
     let(:scope) { 'string.regexp.wysiwyg.d' }
