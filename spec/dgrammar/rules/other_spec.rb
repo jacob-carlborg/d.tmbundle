@@ -53,6 +53,23 @@ describe 'other' do
     end
   end
 
+  describe 'identifier_chars' do
+    let(:rule) { 'identifier_chars' }
+    let(:scope) { 'support.other.identifier-chars.d' }
+
+    describe 'a' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '0foo_bar4asd' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'identifier_start' do
     let(:rule) { 'identifier_start' }
     let(:scope) { 'support.other.identifier-start.d' }

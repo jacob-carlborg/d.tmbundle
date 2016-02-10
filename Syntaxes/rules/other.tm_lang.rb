@@ -24,6 +24,11 @@ trait :other do
     match '_|\p{L}'
   end
 
+  rule 'identifier_chars' do
+    name 'support.other.identifier-chars.d'
+    match { one_or_more(identifier_char) }
+  end
+
   rule 'identifier_char' do
     name 'support.other.identifier-char.d'
     match { identifier_start | `0` | non_zero_digit }
