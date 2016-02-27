@@ -149,7 +149,7 @@ trait :other do
       cast
       debug delete deprecated
       export extern
-      import in inout invariant is
+      import in inout invariant
       lazy
       macro mixin module
       new nothrow
@@ -166,5 +166,31 @@ trait :other do
 
     name 'keyword.other.d'
     match "\\b(?:#{KEYWORDS})\\b"
+  end
+
+  rule 'operator' do
+    match { deprecated_operator | operator_impl }
+  end
+
+  array_to_regexp = -> (array) { array.map { |e| Regexp.escape(e) }.join('|') }
+
+  rule 'operator_impl' do
+    OPERATORS = array_to_regexp.call(%w(
+      /= / ... .. . &= && & |= | || -= -- - += ++ + <= << <<= < >= >>= >>>= >>
+      >>> > != ! ( ) [ ] { } ? , ; : $ => == = *= * %= % ^= ^^ ^^= ^ ~= ~ @ #
+      is
+    )).freeze
+
+    name 'keyword.operator.d'
+    match /(?:#{OPERATORS})/
+  end
+
+  rule 'deprecated_operator' do
+    DEPRECATED_OPERATORs = array_to_regexp.call(
+      %w(<>= <> !<>= !<> !<= !< !>= !>)
+    ).freeze
+
+    name 'keyword.operator.deprecated.d'
+    match /(?:#{DEPRECATED_OPERATORs})/
   end
 end
