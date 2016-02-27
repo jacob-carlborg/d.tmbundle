@@ -1,4 +1,12 @@
 trait :string_literal do
+  rule 'character_literal' do
+    name 'string.quoted.single.d'
+    match { `(?<begin>')` + single_quoted_character + `(?<end>')` }
+
+    capture 'begin', 'punctuation.definition.string.begin.d'
+    capture 'end', 'punctuation.definition.string.end.d'
+  end
+
   rule 'single_quoted_character' do
     name 'support.other.single-quoted-character.d'
     match { escape_sequence | `[^']` }

@@ -1,6 +1,41 @@
 require 'spec_helper'
 
 describe 'string_literal' do
+  describe 'character_literal' do
+    let(:rule) { 'character_literal' }
+    let(:scope) { 'string.quoted.single.d' }
+
+    describe "'a'" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "'ö'" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "'aa'" do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe %q('"') do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '\n' do
+      let(:scope) { 'constant.character.escape.d' }
+      let(:code) { %q('\n') }
+
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+
+    describe "'" do
+      let(:scope) { 'punctuation.definition.string.begin.d' }
+      let(:code) { "'a'" }
+
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+  end
+
   describe 'single_quoted_character' do
     let(:rule) { 'single_quoted_character' }
     let(:scope) { 'support.other.single-quoted-character.d' }
