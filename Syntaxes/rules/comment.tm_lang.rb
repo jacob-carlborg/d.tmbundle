@@ -84,4 +84,9 @@ trait :comment do
     match '(?:^[ \t]*(?:\*|\+)?[ \t]+)?' + "(\\b(?:#{STANDARD_SECTIONS})\\b:)"
     capture 1, 'keyword.other.standard-section.ddoc.d'
   end
+
+  rule 'ddoc_standard_section_escapes' do
+    match '(?:^[ \t]*(?:\*|\+)?[ \t]+)?(\b(?:Escapes)\b[ \t]*=)'
+    capture 1, 'keyword.other.standard-section.ddoc.d'
+  end
 end

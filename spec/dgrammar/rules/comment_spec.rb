@@ -181,5 +181,44 @@ describe 'comment' do
       end
     end
   end
+
+  describe 'ddoc_standard_section_escapes' do
+    let(:rule) { 'ddoc_standard_section_escapes' }
+    let(:scope) { 'keyword.other.standard-section.ddoc.d' }
+
+    describe 'Escapes=' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'with spaces before equals sign' do
+      describe 'Escapes =' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'with leading whitespace' do
+      let(:code) { '    Escapes=' }
+
+      describe 'Escapes=' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'with leading star' do
+      let(:code) { '* Escapes=' }
+
+      describe 'Escapes=' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+
+    context 'with leading plus' do
+      let(:code) { '+ Escapes=' }
+
+      describe 'Escapes=' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
 end
 
