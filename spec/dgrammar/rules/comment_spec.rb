@@ -281,5 +281,18 @@ describe 'comment' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_predefined_macro_li' do
+    let(:rule) { 'ddoc_predefined_macro_li' }
+    let(:scope) { 'markup.list.predefined-macro-li.ddoc.d' }
+
+    describe '$(LI foo)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "$(LI foo\nbar)" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 

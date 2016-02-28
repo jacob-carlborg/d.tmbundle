@@ -128,4 +128,11 @@ trait :comment do
     self.begin '\$\(U '
     self.end '\)'
   end
+
+  rule 'ddoc_predefined_macro_li' do
+    name 'markup.list.predefined-macro-li.ddoc.d'
+
+    self.begin '\$\(LI '
+    self.end '\)'
+  end
 end
