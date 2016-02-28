@@ -14,6 +14,20 @@ describe 'comment' do
     end
   end
 
+  describe 'line_comment' do
+    let(:rule) { 'line_comment' }
+    let(:scope) { 'comment.line.double-slash.d' }
+
+    describe '// foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "//foo" do
+      let(:code) { 'bar//foo' }
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+  end
+
   describe 'nesting_block_comment' do
     let(:rule) { 'nesting_block_comment' }
     let(:scope) { 'comment.block.nesting.d' }

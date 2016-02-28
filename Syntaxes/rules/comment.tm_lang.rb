@@ -9,6 +9,22 @@ trait :comment do
     end_capture 0, 'punctuation.definition.comment.end.d'
   end
 
+  rule 'line_comment' do
+    name 'comment.line.double-slash.d'
+
+    self.begin '(^[ \t]+)?(?=//)'
+    self.end '(?!\G)'
+
+    begin_capture 1, 'punctuation.whitespace.comment.leading.d'
+
+    pattern 'comment.line.double-slash.d' do
+      self.begin '//'
+      self.end '\n'
+
+      begin_capture 0, 'punctuation.definition.comment.d'
+    end
+  end
+
   rule 'nesting_block_comment' do
     name 'comment.block.nesting.d'
 
