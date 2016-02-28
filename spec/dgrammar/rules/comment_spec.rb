@@ -59,4 +59,23 @@ describe 'comment' do
       end
     end
   end
+
+  describe 'documentation_nesting_block_comment' do
+    let(:rule) { 'documentation_nesting_block_comment' }
+    let(:scope) { 'comment.block.documentation.nesting.d' }
+
+    describe '/++ foo +/' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "/++\nfoo\n+/" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'nesting comments' do
+      describe "/++\nfoo /++\nbar\n+/ \n+/" do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
 end

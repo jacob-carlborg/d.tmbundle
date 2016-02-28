@@ -46,4 +46,16 @@ trait :comment do
 
     pattern { include '#nesting_block_comment' }
   end
+
+  rule 'documentation_nesting_block_comment' do
+    name 'comment.block.documentation.nesting.d'
+
+    self.begin '/\+\+'
+    self.end '\+/'
+
+    begin_capture 0, 'punctuation.definition.comment.begin.d'
+    end_capture 0, 'punctuation.definition.comment.end.d'
+
+    pattern { include '#documentation_nesting_block_comment' }
+  end
 end
