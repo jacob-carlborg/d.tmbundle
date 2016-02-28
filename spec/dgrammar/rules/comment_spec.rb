@@ -268,5 +268,18 @@ describe 'comment' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_predefined_macro_u' do
+    let(:rule) { 'ddoc_predefined_macro_u' }
+    let(:scope) { 'markup.underline.predefined-macro-u.ddoc.d' }
+
+    describe '$(U foo)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "$(U foo\nbar)" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 

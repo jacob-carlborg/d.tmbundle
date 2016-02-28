@@ -121,4 +121,11 @@ trait :comment do
     self.begin '\$\(I '
     self.end '\)'
   end
+
+  rule 'ddoc_predefined_macro_u' do
+    name 'markup.underline.predefined-macro-u.ddoc.d'
+
+    self.begin '\$\(U '
+    self.end '\)'
+  end
 end
