@@ -74,4 +74,14 @@ trait :comment do
 
     pattern { include '#documentation_nesting_block_comment' }
   end
+
+  rule 'ddoc_standard_sections' do
+    STANDARD_SECTIONS = %w(
+      Authors Bugs Date Deprecated Examples History License Returns See_Also
+      Standards Throws Version Copyright Params Macros
+    ).join('|').freeze
+
+    match '(?:^[ \t]*(?:\*|\+)?[ \t]+)?' + "(\\b(?:#{STANDARD_SECTIONS})\\b:)"
+    capture 1, 'keyword.other.standard-section.ddoc.d'
+  end
 end
