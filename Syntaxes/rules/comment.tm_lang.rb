@@ -135,4 +135,13 @@ trait :comment do
     self.begin '\$\(LI '
     self.end '\)'
   end
+
+  rule 'ddoc_predefined_macro_d_code' do
+    name 'support.other.predefined-macro.d-code.ddoc.d'
+
+    self.begin '\$\(D_CODE '
+    self.end '\)'
+
+    pattern { include '$self' }
+  end
 end
