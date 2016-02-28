@@ -75,6 +75,14 @@ trait :comment do
     pattern { include '#documentation_nesting_block_comment' }
   end
 
+  rule 'ddoc' do
+    pattern { include '#ddoc_standard_sections' }
+    pattern { include '#ddoc_standard_section_escapes' }
+    pattern { include '#ddoc_embedded_code' }
+    pattern { include '#ddoc_inline_code' }
+    pattern { include '#ddoc_predefined_macros' }
+  end
+
   rule 'ddoc_standard_sections' do
     STANDARD_SECTIONS = %w(
       Authors Bugs Date Deprecated Examples History License Returns See_Also

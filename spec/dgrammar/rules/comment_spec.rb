@@ -93,6 +93,53 @@ describe 'comment' do
     end
   end
 
+  describe 'ddoc' do
+    context 'ddoc_standard_sections' do
+      let(:rule) { 'ddoc_standard_sections' }
+      let(:scope) { 'keyword.other.standard-section.ddoc.d' }
+
+      describe 'Authors:' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'ddoc_standard_section_escapes' do
+      let(:rule) { 'ddoc_standard_section_escapes' }
+      let(:scope) { 'keyword.other.standard-section.ddoc.d' }
+
+      describe 'Escapes=' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'ddoc_embedded_code' do
+      let(:rule) { 'ddoc_embedded_code' }
+      let(:scope) { 'support.other.embedded-code.ddoc.d' }
+
+      describe "---\n---" do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'ddoc_inline_code' do
+      let(:rule) { 'ddoc_inline_code' }
+      let(:scope) { 'support.other.inline-code.ddoc.d' }
+
+      describe '`foo`' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'ddoc_predefined_macros' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'markup.bold.predefined-macro-b.ddoc.d' }
+
+      describe '$(B foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'ddoc_standard_sections' do
     let(:rule) { 'ddoc_standard_sections' }
     let(:scope) { 'keyword.other.standard-section.ddoc.d' }
