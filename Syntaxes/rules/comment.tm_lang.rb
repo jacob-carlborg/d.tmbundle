@@ -144,4 +144,13 @@ trait :comment do
 
     pattern { include '$self' }
   end
+
+  rule 'ddoc_predefined_macro_d_inline_code' do
+    name 'support.other.predefined-macro.d-inline-code.ddoc.d'
+
+    self.begin '\$\(D_INLINECODE '
+    self.end '\)'
+
+    pattern { include '$self' }
+  end
 end

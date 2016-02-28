@@ -307,5 +307,18 @@ describe 'comment' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_predefined_macro_d_inline_code' do
+    let(:rule) { 'ddoc_predefined_macro_d_inline_code' }
+    let(:scope) { 'support.other.predefined-macro.d-inline-code.ddoc.d' }
+
+    describe '$(D_INLINECODE foo)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "$(D_INLINECODE foo\nbar)" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 
