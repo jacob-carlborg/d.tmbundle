@@ -89,4 +89,13 @@ trait :comment do
     match '(?:^[ \t]*(?:\*|\+)?[ \t]+)?(\b(?:Escapes)\b[ \t]*=)'
     capture 1, 'keyword.other.standard-section.ddoc.d'
   end
+
+  rule 'ddoc_embedded_code' do
+    name 'support.other.embedded-code.ddoc.d'
+
+    self.begin '---'
+    self.end '---'
+
+    pattern { include '$self' }
+  end
 end

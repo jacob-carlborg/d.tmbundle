@@ -220,5 +220,14 @@ describe 'comment' do
       end
     end
   end
+
+  describe 'ddoc_embedded_code' do
+    let(:rule) { 'ddoc_embedded_code' }
+    let(:scope) { 'support.other.embedded-code.ddoc.d' }
+
+    describe "---\n---" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 
