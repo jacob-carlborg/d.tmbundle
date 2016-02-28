@@ -35,6 +35,22 @@ trait :comment do
     end
   end
 
+  rule 'documentation_line_comment' do
+    name 'comment.line.tripple-slash.documentation.d'
+
+    self.begin '(^[ \t]+)?(?=///)'
+    self.end '(?!\G)'
+
+    begin_capture 1, 'punctuation.whitespace.comment.leading.d'
+
+    pattern 'comment.line.tripple-slash.d' do
+      self.begin '///'
+      self.end '\n'
+
+      begin_capture 0, 'punctuation.definition.comment.d'
+    end
+  end
+
   rule 'nesting_block_comment' do
     name 'comment.block.nesting.d'
 
