@@ -98,4 +98,13 @@ trait :comment do
 
     pattern { include '$self' }
   end
+
+  rule 'ddoc_inline_code' do
+    name 'support.other.inline-code.ddoc.d'
+    match '`([^`]*)`'
+
+    capture 1 do
+      pattern { include '$self' }
+    end
+  end
 end

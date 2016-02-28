@@ -229,5 +229,18 @@ describe 'comment' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_inline_code' do
+    let(:rule) { 'ddoc_inline_code' }
+    let(:scope) { 'support.other.inline-code.ddoc.d' }
+
+    describe '`foo`' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "`foo\nbar`" do
+      it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 
