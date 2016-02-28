@@ -107,4 +107,11 @@ trait :comment do
       pattern { include '$self' }
     end
   end
+
+  rule 'ddoc_predefined_macro_b' do
+    name 'markup.bold.predefined-macro-b.ddoc.d'
+
+    self.begin '\$\(B '
+    self.end '\)'
+  end
 end

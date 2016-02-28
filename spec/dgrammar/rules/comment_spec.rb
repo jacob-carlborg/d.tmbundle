@@ -242,5 +242,18 @@ describe 'comment' do
       it { should_not be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_predefined_macro_b' do
+    let(:rule) { 'ddoc_predefined_macro_b' }
+    let(:scope) { 'markup.bold.predefined-macro-b.ddoc.d' }
+
+    describe '$(B foo)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "$(B foo\nbar)" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 
