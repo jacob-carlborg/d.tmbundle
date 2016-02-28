@@ -118,4 +118,16 @@ trait :string_literal do
     begin_capture 1, 'punctuation.definition.string.begin.d'
     end_capture 0, 'punctuation.definition.string.end.d'
   end
+
+  rule 'token_string' do
+    name 'string.unquoted.token-string.d'
+
+    self.begin '(q){'
+    self.end '}'
+
+    begin_capture 1, 'punctuation.definition.string.begin.d'
+    end_capture 0, 'punctuation.definition.string.end.d'
+
+    pattern { include '$self' }
+  end
 end
