@@ -243,6 +243,62 @@ describe 'comment' do
     end
   end
 
+  describe 'ddoc_predefined_macros' do
+    context 'B macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'markup.bold.predefined-macro-b.ddoc.d' }
+
+      describe '$(B foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'I macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'markup.italic.predefined-macro-i.ddoc.d' }
+
+      describe '$(I foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'U macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'markup.underline.predefined-macro-u.ddoc.d' }
+
+      describe '$(U foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'LI macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'markup.list.predefined-macro-li.ddoc.d' }
+
+      describe '$(LI foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'D_CODE macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'support.other.predefined-macro.d-code.ddoc.d' }
+
+      describe '$(D_CODE foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'D_INLINECODE macro' do
+      let(:rule) { 'ddoc_predefined_macros' }
+      let(:scope) { 'support.other.predefined-macro.d-inline-code.ddoc.d' }
+
+      describe '$(D_INLINECODE foo)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'ddoc_predefined_macro_b' do
     let(:rule) { 'ddoc_predefined_macro_b' }
     let(:scope) { 'markup.bold.predefined-macro-b.ddoc.d' }

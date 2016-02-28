@@ -108,6 +108,15 @@ trait :comment do
     end
   end
 
+  rule 'ddoc_predefined_macros' do
+    pattern { include '#ddoc_predefined_macro_b' }
+    pattern { include '#ddoc_predefined_macro_i' }
+    pattern { include '#ddoc_predefined_macro_u' }
+    pattern { include '#ddoc_predefined_macro_li' }
+    pattern { include '#ddoc_predefined_macro_d_code' }
+    pattern { include '#ddoc_predefined_macro_d_inline_code' }
+  end
+
   rule 'ddoc_predefined_macro_b' do
     name 'markup.bold.predefined-macro-b.ddoc.d'
 
