@@ -9,6 +9,16 @@ trait :comment do
     end_capture 0, 'punctuation.definition.comment.end.d'
   end
 
+  rule 'documentation_block_comment' do
+    name 'comment.block.documentation.d'
+
+    self.begin '/\*\*'
+    self.end '\*/'
+
+    begin_capture 0, 'punctuation.definition.comment.begin.d'
+    end_capture 0, 'punctuation.definition.comment.end.d'
+  end
+
   rule 'line_comment' do
     name 'comment.line.double-slash.d'
 

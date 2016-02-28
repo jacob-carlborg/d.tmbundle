@@ -14,6 +14,19 @@ describe 'comment' do
     end
   end
 
+  describe 'documentation_block_comment' do
+    let(:rule) { 'documentation_block_comment' }
+    let(:scope) { 'comment.block.documentation.d' }
+
+    describe '/** foo */' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "/**\nfoo\n*/" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'line_comment' do
     let(:rule) { 'line_comment' }
     let(:scope) { 'comment.line.double-slash.d' }
