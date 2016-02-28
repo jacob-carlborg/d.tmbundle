@@ -255,5 +255,18 @@ describe 'comment' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'ddoc_predefined_macro_i' do
+    let(:rule) { 'ddoc_predefined_macro_i' }
+    let(:scope) { 'markup.italic.predefined-macro-i.ddoc.d' }
+
+    describe '$(I foo)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe "$(I foo\nbar)" do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
 

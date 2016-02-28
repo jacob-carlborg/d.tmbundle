@@ -114,4 +114,11 @@ trait :comment do
     self.begin '\$\(B '
     self.end '\)'
   end
+
+  rule 'ddoc_predefined_macro_i' do
+    name 'markup.italic.predefined-macro-i.ddoc.d'
+
+    self.begin '\$\(I '
+    self.end '\)'
+  end
 end
