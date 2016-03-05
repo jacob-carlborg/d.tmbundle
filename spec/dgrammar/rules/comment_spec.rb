@@ -25,6 +25,15 @@ describe 'comment' do
     describe "/**\nfoo\n*/" do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
+
+    context 'ddoc' do
+      let(:scope) { 'keyword.other.standard-section.ddoc.d' }
+      let(:code) { '/**Authors:*/' }
+
+      describe 'Authors:' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
   end
 
   describe 'line_comment' do
@@ -89,6 +98,15 @@ describe 'comment' do
     context 'nesting comments' do
       describe "/++\nfoo /++\nbar\n+/ \n+/" do
         it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'ddoc' do
+      let(:scope) { 'keyword.other.standard-section.ddoc.d' }
+      let(:code) { '/++Authors:+/' }
+
+      describe 'Authors:' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
       end
     end
   end

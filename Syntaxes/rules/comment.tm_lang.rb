@@ -17,6 +17,8 @@ trait :comment do
 
     begin_capture 0, 'punctuation.definition.comment.begin.d'
     end_capture 0, 'punctuation.definition.comment.end.d'
+
+    pattern { include '#ddoc' }
   end
 
   rule 'line_comment' do
@@ -73,6 +75,7 @@ trait :comment do
     end_capture 0, 'punctuation.definition.comment.end.d'
 
     pattern { include '#documentation_nesting_block_comment' }
+    pattern { include '#ddoc' }
   end
 
   rule 'ddoc' do
