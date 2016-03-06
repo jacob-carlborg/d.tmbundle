@@ -97,6 +97,28 @@ describe 'module' do
     end
   end
 
+  describe 'import_bind' do
+    let(:rule) { 'import_bind' }
+    let(:scope) { 'support.other.import-bind.d' }
+
+    describe 'foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo' do
+      let(:scope) { 'support.other.identifier.d' }
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo = bar' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'bar=foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'module_alias_identifier' do
     let(:rule) { 'module_alias_identifier' }
     let(:scope) { 'support.other.module-alias-identifier.d' }

@@ -34,6 +34,11 @@ trait :module do
     match { identifier }
   end
 
+  rule 'import_bind' do
+    name 'support.other.import-bind.d'
+    match { identifier + '\s*=\s*' + identifier | identifier }
+  end
+
   rule 'module_alias_identifier' do
     name 'support.other.module-alias-identifier.d'
     match { identifier }
