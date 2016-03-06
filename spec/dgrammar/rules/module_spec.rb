@@ -97,6 +97,41 @@ describe 'module' do
     end
   end
 
+  describe 'import' do
+    let(:rule) { 'import' }
+    let(:scope) { 'support.other.import.d' }
+
+    describe 'foo.bar' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a = b.c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'module_fully_qualified_name' do
+      let(:scope) { 'support.other.module-fully-qualified-name.d' }
+
+      describe 'foo.bar' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'b.c' do
+        let(:code) { 'a = b.c' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+
+    context 'module_alias_identifier' do
+      let(:code) { 'a = b.c' }
+      let(:scope) { 'support.other.module-alias-identifier.d' }
+
+      describe 'a' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'import_bind_list' do
     let(:rule) { 'import_bind_list' }
     let(:scope) { 'support.other.import-bind-list.d' }
