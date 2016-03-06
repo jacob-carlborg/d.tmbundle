@@ -1,4 +1,9 @@
 trait :module do
+  rule 'module_fully_qualified_name' do
+    name 'support.other.module-fully-qualified-name.d'
+    match { packages + '\.' + module_name | module_name }
+  end
+
   rule 'module_name' do
     name 'support.other.module-name.d'
     match { identifier }
