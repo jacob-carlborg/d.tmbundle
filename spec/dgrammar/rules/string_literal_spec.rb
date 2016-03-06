@@ -58,6 +58,58 @@ describe 'string_literal' do
     end
   end
 
+  describe 'string_literal' do
+    let(:rule) { 'string_literal' }
+
+    describe 'wysiwyg_string' do
+      let(:scope) { 'string.regexp.wysiwyg.d' }
+
+      describe 'r"foo"' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    describe 'alternate_wysiwyg_string' do
+      let(:scope) { 'string.quoted.other.alternate-wysiwyg.d' }
+
+      describe '`foo`' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    describe 'double_quoted_string' do
+      let(:scope) { 'string.quoted.double.d' }
+
+      describe '"foo"' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    describe 'hex_string' do
+      let(:scope) { 'string.quoted.double.hex.d' }
+
+      describe 'x"ab0123"' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    describe 'delimited_string' do
+      let(:scope) { 'string.unquoted.delimited-string.d' }
+
+      describe %(q"foo\nabc\nfoo") do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    describe 'token_string' do
+      let(:scope) { 'string.unquoted.token-string.d' }
+
+      describe 'q{foo\nbar}' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'wysiwyg_string' do
     let(:rule) { 'wysiwyg_string' }
     let(:scope) { 'string.regexp.wysiwyg.d' }

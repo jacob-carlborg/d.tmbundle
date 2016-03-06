@@ -12,6 +12,15 @@ trait :string_literal do
     match { escape_sequence | `[^']` }
   end
 
+  rule 'string_literal' do
+    pattern { include '#wysiwyg_string' }
+    pattern { include '#alternate_wysiwyg_string' }
+    pattern { include '#double_quoted_string' }
+    pattern { include '#hex_string' }
+    pattern { include '#delimited_string' }
+    pattern { include '#token_string' }
+  end
+
   rule 'wysiwyg_string' do
     name 'string.regexp.wysiwyg.d'
 
