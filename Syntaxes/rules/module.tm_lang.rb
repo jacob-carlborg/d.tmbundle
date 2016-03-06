@@ -33,4 +33,9 @@ trait :module do
     name 'support.other.package-name.d'
     match { identifier }
   end
+
+  rule 'module_alias_identifier' do
+    name 'support.other.module-alias-identifier.d'
+    match { identifier }
+  end
 end

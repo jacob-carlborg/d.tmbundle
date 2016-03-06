@@ -96,4 +96,13 @@ describe 'module' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
   end
+
+  describe 'module_alias_identifier' do
+    let(:rule) { 'module_alias_identifier' }
+    let(:scope) { 'support.other.module-alias-identifier.d' }
+
+    describe 'foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
 end
