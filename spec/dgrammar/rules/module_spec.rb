@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe 'module' do
+  describe 'module_declaration' do
+    let(:rule) { 'module_declaration' }
+    let(:scope) { 'meta.module.d' }
+    let(:code) { 'module foo.bar;' }
+
+    describe 'module foo.bar;' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo.bar' do
+      let(:scope) { 'entity.name.function.module.d' }
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+
+    describe 'foo.bar' do
+      let(:scope) { 'support.other.module-fully-qualified-name.d' }
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+  end
+
   describe 'module_fully_qualified_name' do
     let(:rule) { 'module_fully_qualified_name' }
     let(:scope) { 'support.other.module-fully-qualified-name.d' }
