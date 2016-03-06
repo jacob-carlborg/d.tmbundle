@@ -1,3 +1,5 @@
+import 'rules/root'
+
 import 'rules/module'
 
 import 'rules/comment'
@@ -13,6 +15,8 @@ grammar 'source.d' do
   name 'D'
   uuid 'D7C3A109-0466-4C28-9ECF-10753300FF46'
   first_line_match '^#!.*\bg?dmd\b.'
+
+  mixin :root
 
   # Parser
   mixin :module
