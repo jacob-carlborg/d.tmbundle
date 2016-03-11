@@ -132,6 +132,37 @@ describe 'module' do
     end
   end
 
+  describe 'import_bindings' do
+    let(:rule) { 'import_bindings' }
+    let(:scope) { 'support.other.import-bindings.d' }
+
+    describe 'a.b : c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a.b:c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'import' do
+      describe 'a.b' do
+        let(:scope) { 'support.other.import.d' }
+        let(:code) { 'a.b : c' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+
+    context 'import_bind_list' do
+      describe 'c' do
+        let(:scope) { 'support.other.import-bind-list.d' }
+        let(:code) { 'a.b : c' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'import_bind_list' do
     let(:rule) { 'import_bind_list' }
     let(:scope) { 'support.other.import-bind-list.d' }

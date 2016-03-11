@@ -43,6 +43,11 @@ trait :module do
     end
   end
 
+  rule 'import_bindings' do
+    name 'support.other.import-bindings.d'
+    match { import + '\s*:\s*' + import_bind_list }
+  end
+
   rule 'import_bind_list' do
     name 'support.other.import-bind-list.d'
     match { import_bind + zero_or_more(`\\s*,\\s*` + import_bind) }
