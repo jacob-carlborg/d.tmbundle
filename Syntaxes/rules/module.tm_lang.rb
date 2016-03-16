@@ -34,6 +34,15 @@ trait :module do
     match { identifier }
   end
 
+  rule 'import_list' do
+    name 'support.other.import-list.d'
+
+    match do
+      import_bindings |
+      import + zero_or_more(`\\s*,\\s*` + (import_bindings | import))
+    end
+  end
+
   rule 'import' do
     name 'support.other.import.d'
 

@@ -97,6 +97,49 @@ describe 'module' do
     end
   end
 
+  describe 'import_list' do
+    let(:rule) { 'import_list' }
+    let(:scope) { 'support.other.import-list.d' }
+
+    describe 'a = b.c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a.b : c' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo, bar' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'a = b.c, foo.bar, d.e : f' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'import' do
+      let(:scope) { 'support.other.import.d' }
+      let(:code) { 'a = b.c, foo.bar, d.e : f' }
+
+      describe 'a = b.c' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'foo.bar' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+
+    context 'import_bindings' do
+      let(:scope) { 'support.other.import-bindings.d' }
+      let(:code) { 'a = b.c, foo.bar, d.e : f' }
+
+      describe 'd.e : f' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'import' do
     let(:rule) { 'import' }
     let(:scope) { 'support.other.import.d' }
