@@ -34,6 +34,21 @@ trait :module do
     match { identifier }
   end
 
+  rule 'import_declaration' do
+    name 'meta.import.d'
+
+    match do
+      optional(capture(:static, '\b(static)\b') + /\s+/) +
+      capture(:import, '\b(import)\b') +
+      /\s+/ +
+      import_list +
+      /\s*;/
+    end
+
+    capture :static, 'keyword.other.static.d'
+    capture :import, 'keyword.other.import.d'
+  end
+
   rule 'import_list' do
     name 'support.other.import-list.d'
 

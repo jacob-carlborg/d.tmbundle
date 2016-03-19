@@ -11,6 +11,14 @@ describe 'root' do
     end
   end
 
+  describe 'import_declaration' do
+    let(:scope) { 'meta.import.d' }
+
+    describe 'import foo.bar;' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'string_literal' do
     let(:scope) { 'string.quoted.double.d' }
 

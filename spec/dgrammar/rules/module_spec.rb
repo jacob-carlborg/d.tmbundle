@@ -97,6 +97,42 @@ describe 'module' do
     end
   end
 
+  describe 'import_declaration' do
+    let(:rule) { 'import_declaration' }
+    let(:scope) { 'meta.import.d' }
+    let(:code) { 'import foo.bar;' }
+
+    describe 'import foo.bar;' do
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+
+    describe 'import' do
+      let(:scope) { 'keyword.other.import.d' }
+
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+
+    describe 'foo.bar' do
+      let(:scope) { 'support.other.import-list.d' }
+
+      it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+    end
+
+    context 'static import' do
+      let(:code) { 'static import foo.bar;' }
+
+      describe 'static import foo.bar;' do
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'static' do
+        let(:scope) { 'keyword.other.static.d' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'import_list' do
     let(:rule) { 'import_list' }
     let(:scope) { 'support.other.import-list.d' }

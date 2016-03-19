@@ -4,6 +4,7 @@ trait :root do
   rule 'root' do
     # Grammar
     pattern { include '#module_declaration' }
+    pattern { include '#import_declaration' }
 
     # Lexical
     pattern { include '#character_literal' }
