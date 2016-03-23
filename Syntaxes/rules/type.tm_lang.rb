@@ -1,4 +1,9 @@
 trait :type do
+  rule 'type_ctors' do
+    name 'support.other.type-ctors.d'
+    match { type_ctor + optional(`\\s+` + type_ctor) }
+  end
+
   rule 'type_ctor' do
     TYPE_CONSTRUCTORS = %w(const immutable inout shared).join('|').freeze
 

@@ -1,6 +1,28 @@
 require 'spec_helper'
 
 describe 'type' do
+  describe 'type_ctors' do
+    let(:rule) { 'type_ctors' }
+    let(:scope) { 'support.other.type-ctors.d' }
+
+    describe 'const' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'immutable const' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'type_ctor' do
+      describe 'immutable' do
+        let(:code) { 'immutable const' }
+        let(:scope) { 'storage.modifier.type-constructor.d' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'type_ctor' do
     let(:rule) { 'type_ctor' }
     let(:scope) { 'storage.modifier.type-constructor.d' }
