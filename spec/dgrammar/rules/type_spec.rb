@@ -1,6 +1,27 @@
 require 'spec_helper'
 
 describe 'type' do
+  describe 'type_ctor' do
+    let(:rule) { 'type_ctor' }
+    let(:scope) { 'storage.modifier.type-constructor.d' }
+
+    describe 'const' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'immutable' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'inout' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'shared' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+  end
+
   describe 'basic_type_x' do
     let(:rule) { 'basic_type_x' }
     let(:scope) { 'storage.type.basic.d' }

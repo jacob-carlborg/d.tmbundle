@@ -1,4 +1,11 @@
 trait :type do
+  rule 'type_ctor' do
+    TYPE_CONSTRUCTORS = %w(const immutable inout shared).join('|').freeze
+
+    name 'storage.modifier.type-constructor.d'
+    match /\b(?:#{TYPE_CONSTRUCTORS})\b/
+  end
+
   rule 'basic_type_x' do
     BASIC_TYPES = %w(
       bool
