@@ -1,5 +1,6 @@
 import 'rules/root'
 
+import 'rules/type'
 import 'rules/module'
 
 import 'rules/comment'
@@ -19,6 +20,7 @@ grammar 'source.d' do
   mixin :root
 
   # Parser
+  mixin :type
   mixin :module
 
   # Lexical
