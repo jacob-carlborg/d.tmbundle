@@ -135,5 +135,31 @@ describe 'type' do
     describe 'void' do
       it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
     end
+
+    describe 'typeof' do
+      let(:rule) { 'typeof' }
+      let(:scope) { 'meta.typeof.d' }
+      let(:code) { 'typeof(return)' }
+
+      describe 'typeof(return)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'typeof ( return )' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'typeof' do
+        let(:scope) { 'storage.modifier.typeof.d' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'return' do
+        let(:scope) { 'keyword.control.return.d' }
+
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
   end
 end

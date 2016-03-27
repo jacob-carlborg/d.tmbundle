@@ -40,5 +40,16 @@ trait :type do
     name 'storage.type.basic.d'
     match /\b(?:#{BASIC_TYPES})\b/
   end
+
+  rule 'typeof' do
+    name 'meta.typeof.d'
+
+    match do
+      word_boundary(:typeof) + '\s*\(\s*' + word_boundary(:return) + '\s*\)'
+    end
+
+    capture :typeof, 'storage.modifier.typeof.d'
+    capture :return, 'keyword.control.return.d'
+  end
 end
 
