@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe 'expression' do
+  describe 'pow_expression' do
+    let(:rule) { 'pow_expression' }
+    let(:scope) { 'support.other.pow-expression.d' }
+
+    describe 'false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'primary_expression' do
+      let(:scope) { 'support.other.postfix-expression.d' }
+
+      describe 'true' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'postfix_expression' do
     let(:rule) { 'postfix_expression' }
     let(:scope) { 'support.other.postfix-expression.d' }

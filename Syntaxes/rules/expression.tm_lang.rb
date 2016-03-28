@@ -1,4 +1,12 @@
 trait :expression do
+  rule 'pow_expression' do
+    name 'support.other.pow-expression.d'
+    match do
+      postfix_expression
+      # postfix_expression ^^ unary_expression TODO
+    end
+  end
+
   rule 'postfix_expression' do
     name 'support.other.postfix-expression.d'
     match do
