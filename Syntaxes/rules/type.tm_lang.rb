@@ -11,6 +11,19 @@ trait :type do
     match /\b(?:#{TYPE_CONSTRUCTORS})\b/
   end
 
+  rule 'basic_type' do
+    name 'support.other.basic-type.d'
+    match do
+      basic_type_x |
+      # . identifier_list | TODO
+      # identifier_list | TODO
+      typeof
+      # typeof . identifier_list | TODO
+      # type_ctor ( Type ) | TODO
+      # type_vector TODO
+    end
+  end
+
   rule 'basic_type_x' do
     BASIC_TYPES = %w(
       bool

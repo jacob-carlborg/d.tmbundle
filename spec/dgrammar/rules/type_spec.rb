@@ -44,6 +44,35 @@ describe 'type' do
     end
   end
 
+  describe 'basic_type' do
+    let(:rule) { 'basic_type' }
+    let(:scope) { 'support.other.basic-type.d' }
+
+    describe 'bool' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'typeof(return)' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'basic_type_x' do
+      let(:scope) { 'storage.type.basic.d' }
+
+      describe 'bool' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+
+    context 'typeof' do
+      let(:scope) { 'meta.typeof.d' }
+
+      describe 'typeof(return)' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'basic_type_x' do
     let(:rule) { 'basic_type_x' }
     let(:scope) { 'storage.type.basic.d' }
