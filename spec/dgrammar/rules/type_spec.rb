@@ -1,6 +1,33 @@
 require 'spec_helper'
 
 describe 'type' do
+  describe 'type' do
+    let(:rule) { 'type' }
+    let(:scope) { 'meta.type.d' }
+
+    describe 'int' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'const int' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'const bool' do
+      let(:code) { 'const bool' }
+
+      describe 'const' do
+        let(:scope) { 'support.other.type-ctors.d' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'bool' do
+        let(:scope) { 'support.other.basic-type.d' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'type_ctors' do
     let(:rule) { 'type_ctors' }
     let(:scope) { 'support.other.type-ctors.d' }

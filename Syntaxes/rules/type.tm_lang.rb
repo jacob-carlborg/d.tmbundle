@@ -1,4 +1,9 @@
 trait :type do
+  rule 'type' do
+    name 'meta.type.d'
+    match { type_ctors + /\s+/ + basic_type } # + basic_type2? TODO
+  end
+
   rule 'type_ctors' do
     name 'support.other.type-ctors.d'
     match { type_ctor + optional(`\\s+` + type_ctor) }
