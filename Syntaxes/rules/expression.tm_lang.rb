@@ -1,4 +1,28 @@
 trait :expression do
+  rule 'postfix_expression' do
+    name 'support.other.postfix-expression.d'
+    match do
+      base_postfix_expression + /\s*\.\s*/ + identifier |
+      base_postfix_expression + /\s*\+\+/ |
+      base_postfix_expression + /\s*--/ |
+      base_postfix_expression
+      # base_postfix_expression . template_instance |
+      # base_postfix_expression . new_expression |
+      # base_postfix_expression -- |
+      # base_postfix_expression ( argument_listopt ) |
+    end
+  end
+
+  rule 'base_postfix_expression' do
+    name 'support.other.base-postfix-expression.d'
+    match do
+      primary_expression
+      # type_ctors? + basic_type + ( argument_list? )
+      # index_expression
+      # slice_expression
+    end
+  end
+
   rule 'primary_expression' do
     name 'support.other.primary-expression.d'
 

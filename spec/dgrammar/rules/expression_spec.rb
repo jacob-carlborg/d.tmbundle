@@ -1,6 +1,81 @@
 require 'spec_helper'
 
 describe 'expression' do
+  describe 'postfix_expression' do
+    let(:rule) { 'postfix_expression' }
+    let(:scope) { 'support.other.postfix-expression.d' }
+
+    describe 'true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'true.foo' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo++' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'foo--' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'base_postfix_expression' do
+      let(:scope) { 'support.other.base-postfix-expression.d' }
+
+      describe 'false' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      context '.identifier' do
+        let(:code) { 'false . bar' }
+
+        describe 'false' do
+          it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+        end
+
+        describe 'bar' do
+          let(:scope) { 'support.other.identifier.d' }
+          it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+        end
+      end
+
+      context '++' do
+        let(:code) { 'foo++' }
+
+        describe 'foo' do
+          it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+        end
+      end
+
+      context '--' do
+        let(:code) { 'foo--' }
+
+        describe 'foo' do
+          it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+        end
+      end
+    end
+  end
+
+  describe 'base_postfix_expression' do
+    let(:rule) { 'base_postfix_expression' }
+    let(:scope) { 'support.other.base-postfix-expression.d' }
+
+    describe 'true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'primary_expression' do
+      let(:scope) { 'support.other.primary-expression.d' }
+
+      describe 'false' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'primary_expression' do
     let(:rule) { 'primary_expression' }
     let(:scope) { 'support.other.primary-expression.d' }
