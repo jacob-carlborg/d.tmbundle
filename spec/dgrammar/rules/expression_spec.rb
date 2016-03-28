@@ -1,6 +1,184 @@
 require 'spec_helper'
 
 describe 'expression' do
+  describe 'unary_expression' do
+    let(:rule) { 'unary_expression' }
+    let(:scope) { 'support.other.unary-expression.d' }
+
+    describe '&false++false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '++false--true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '--false*false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '*false-false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '-false+false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '+false!true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '!false true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'true&false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'base_unary_expression' do
+      let(:scope) { 'support.other.base-unary-expression2.d' }
+
+      describe 'false ++ false' do
+        let(:code) { '& false ++ false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false -- true' do
+        let(:code) { '++ false -- true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false * false' do
+        let(:code) { '-- false * false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false - false' do
+        let(:code) { '* false - false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false + false' do
+        let(:code) { '- false + false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false ! true' do
+        let(:code) { '+ false ! true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'false true' do
+        let(:code) { '! false true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe ' & false' do
+        let(:code) { 'true & false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
+  describe 'base_unary_expression2' do
+    let(:rule) { 'base_unary_expression2' }
+    let(:scope) { 'support.other.base-unary-expression2.d' }
+
+    describe 'true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' &false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' ++false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' --false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' *false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' -false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' +false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe ' !false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'base_unary_expression' do
+      let(:scope) { 'support.other.base-unary-expression.d' }
+
+      describe 'true' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '& true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '++ true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '-- true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '* true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '- true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '+ true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { '! true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
+  describe 'base_unary_expression' do
+    let(:rule) { 'base_unary_expression' }
+    let(:scope) { 'support.other.base-unary-expression.d' }
+
+    describe 'false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'pow_expression' do
+      let(:scope) { 'support.other.pow-expression.d' }
+
+      describe 'true' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'pow_expression' do
     let(:rule) { 'pow_expression' }
     let(:scope) { 'support.other.pow-expression.d' }

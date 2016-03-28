@@ -1,4 +1,45 @@
 trait :expression do
+  rule 'unary_expression' do
+    name 'support.other.unary-expression.d'
+    match do
+      `&\\s*` + one_or_more(base_unary_expression2) |
+      `\\+\\+\\s*` + one_or_more(base_unary_expression2) |
+      `--\\s*` + one_or_more(base_unary_expression2) |
+      `\\*\\s*` + one_or_more(base_unary_expression2) |
+      `-\\s*` + one_or_more(base_unary_expression2) |
+      `\\+\\s*` + one_or_more(base_unary_expression2) |
+      `\\!\\s*` + one_or_more(base_unary_expression2) |
+      base_unary_expression + one_or_more(base_unary_expression2) |
+      base_unary_expression
+    end
+  end
+
+  rule 'base_unary_expression2' do
+    name 'support.other.base-unary-expression2.d'
+    match do
+      base_unary_expression |
+      `\\s*&\\s*` + base_unary_expression |
+      `\\s*\\+\\+\\s*` + base_unary_expression |
+      `\\s*--\\s*` + base_unary_expression |
+      `\\s*\\*\\s*` + base_unary_expression |
+      `\\s*-\\s*` + base_unary_expression |
+      `\\s*\\+\\s*` + base_unary_expression |
+      `\\s*\\!\\s*` + base_unary_expression
+    end
+  end
+
+  rule 'base_unary_expression' do
+    name 'support.other.base-unary-expression.d'
+    match do
+      # complement_expression TODO
+      # ( type ) . identifier TODO
+      # ( type ) . template_instance TODO
+      # delete_expression TODO
+      # cast_expression TODO
+      pow_expression
+    end
+  end
+
   rule 'pow_expression' do
     name 'support.other.pow-expression.d'
     match do
