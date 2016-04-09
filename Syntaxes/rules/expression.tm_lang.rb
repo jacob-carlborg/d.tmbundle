@@ -1,4 +1,24 @@
 trait :expression do
+  rule 'mul_expression' do
+    name 'support.other.mul-expression.d'
+
+    match do
+      unary_expression + one_or_more(base_mul_expression) |
+      unary_expression
+    end
+  end
+
+  rule 'base_mul_expression' do
+    name 'support.other.base-mul-expression.d'
+
+    match do
+      `\\s*\\*\\s*` + unary_expression |
+      `\\s*/\\s*` + unary_expression |
+      `\\s*%\\s*` + unary_expression |
+      unary_expression
+    end
+  end
+
   rule 'unary_expression' do
     name 'support.other.unary-expression.d'
     match do

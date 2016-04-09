@@ -14,8 +14,8 @@ grammar 'source.d' do
   comment 'D language'
   file_types %w(d di)
   key_equivalent '^~D'
-  name 'D'
-  uuid 'D7C3A109-0466-4C28-9ECF-10753300FF46'
+  name 'Foo'
+  uuid 'D7C3A109-0466-4C28-9ECF-10753300FF47'
   first_line_match '^#!.*\bg?dmd\b.'
 
   mixin :root

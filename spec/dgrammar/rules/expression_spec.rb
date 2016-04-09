@@ -1,6 +1,76 @@
 require 'spec_helper'
 
 describe 'expression' do
+  describe 'mul_expression' do
+    let(:rule) { 'mul_expression' }
+    let(:scope) { 'support.other.mul-expression.d' }
+
+    describe 'true * true / true % false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'true / true * true % false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe 'true % true / true * false' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'base_mul_expression' do
+      let(:scope) { 'support.other.base-mul-expression.d' }
+
+      describe 'true * true' do
+        let(:code) { 'true * true / true % false' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true / true * true % false' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+
+      describe 'true % true / true * false' do
+        it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+      end
+    end
+  end
+
+  describe 'base_mul_expression' do
+    let(:rule) { 'base_mul_expression' }
+    let(:scope) { 'support.other.base-mul-expression.d' }
+
+    describe '*true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '/true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    describe '%true' do
+      it { should be_parsed_as(scope).in_code(subject).with_rule(rule) }
+    end
+
+    context 'unary_expression' do
+      let(:scope) { 'support.other.unary-expression.d' }
+
+      describe 'true' do
+        let(:code) { ' * true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { ' / true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+
+      describe 'true' do
+        let(:code) { ' % true' }
+        it { should be_parsed_as(scope).in_code(code).with_rule(rule) }
+      end
+    end
+  end
+
   describe 'unary_expression' do
     let(:rule) { 'unary_expression' }
     let(:scope) { 'support.other.unary-expression.d' }
