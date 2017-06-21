@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby20
+
+require 'digest/sha1'
+require 'json'
+require 'set'
+
+module RubyDig
+  def dig(key, *rest)
+    value = self[key]
+    if value.nil? || rest.empty?
+      value
+    elsif value.respond_to?(:dig)
+      value.dig(*rest)
+    else
+      fail TypeError, "#{value.class} does not have #dig method"
+    end
+  end
+end
+
+if RUBY_VERSION &lt; '2.3'
+  class Array
+    include RubyDig
+  end
+
+  class Hash
+    include RubyDig
+  end
+end
+
+dir = ENV['TM_PROJECT_DIRECTORY']
+import_paths = Set.new
+
+if dir
+  dub_json = File.join(dir, 'dub.json')
+  dub_sdl = File.join(dir, 'dub.sdl')
+  
+  if File.exist?(dub_json) || File.exist?(dub_sdl)
+    Dir.chdir(dir) do
+      result = `dub describe --compiler=/Users/doob/.dvm/compilers/dmd-2.071.1/osx/bin/dmd`
+      json = JSON.parse(result)
+      packages = json['packages'] || []
+      packages.each do |pack|
+        path = pack['path']
+        imps = pack['importPaths'] || []
+        import_paths += imps.map { |e| File.join(path, e) }
+      end
+
+      targets = json['targets'] || []
+
+      targets.each do |target|
+        import_paths += (target['importPaths'] || [])
+      end
+    end
+  end
+end
+
+socket_file = Digest::SHA1.hexdigest(ENV['TM_PROJECT_DIRECTORY']) + '.sock'
+socket_file = '/Users/doob/development/d/dstep/socket.sock'
+p `dcd-server --socketFile #{socket_file}`
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^s</string>
+	<key>name</key>
+	<string>Start DCD Server</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.d</string>
+	<key>uuid</key>
+	<string>40F04B20-996E-4C3B-B8A9-193D8C87A0E3</string>
+</dict>
+</plist>

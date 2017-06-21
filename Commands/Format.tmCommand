@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby20
+
+require 'open3'
+
+dfmt = '/usr/local/bin/dfmt'
+args = ['--indent_style', 'space', '--indent_size', '4']
+stdout, _ = Open3.capture3(dfmt, *args, stdin_data: $stdin.read)
+print stdout</string>
+	<key>input</key>
+	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>^H</string>
+	<key>name</key>
+	<string>Format Document</string>
+	<key>outputCaret</key>
+	<string>interpolateByChar</string>
+	<key>outputFormat</key>
+	<string>text</string>
+	<key>outputLocation</key>
+	<string>replaceDocument</string>
+	<key>scope</key>
+	<string>source.d</string>
+	<key>uuid</key>
+	<string>D468024C-C7EA-4D18-B1EE-394B1C2436A4</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

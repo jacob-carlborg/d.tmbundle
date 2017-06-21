@@ -51,7 +51,9 @@ class DocummentationCommand < DcdCommand
   end
 
   def generate_ddoc(documentation)
-    Dir.mktmpdir do |dir|
+    dir = '/Users/doob/tmp'
+    Dir.chdir(dir) do
+    # Dir.mktmpdir do |dir|
       ddoc_file, output_file = build_ddoc_filenames(dir)
       File.write(ddoc_file, documentation)
       execute_ddoc_command(dir, ddoc_file, output_file)
