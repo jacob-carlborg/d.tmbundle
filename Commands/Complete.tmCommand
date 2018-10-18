@@ -117,7 +117,7 @@ Completer.new.complete(session.document.content, session.cursor)
 	<key>inputFormat</key>
 	<string>text</string>
 	<key>keyEquivalent</key>
-	<string>~</string>
+	<string>@ </string>
 	<key>name</key>
 	<string>Complete</string>
 	<key>outputCaret</key>

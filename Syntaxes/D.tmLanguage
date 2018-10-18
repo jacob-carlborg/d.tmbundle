@@ -771,19 +771,30 @@
 		<dict>
 			<key>captures</key>
 			<dict>
-				<key>1</key>
+				<key>module</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.control.module.d</string>
 				</dict>
-				<key>2</key>
+				<key>module_fully_qualified_name</key>
 				<dict>
 					<key>name</key>
 					<string>entity.name.function.package.d</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(module)\s+([^ ;]+?);</string>
+			<string>(?x)
+				(?:
+					(?&lt;module_declaration&gt;(?&lt;module&gt;module)\s+\g&lt;module_fully_qualified_name&gt;\s*;)
+					(?&lt;module_fully_qualified_name&gt;\g&lt;module_name&gt;|\g&lt;packages&gt;\.\g&lt;module_name&gt;)
+					(?&lt;module_name&gt;\g&lt;identifier&gt;)
+					(?&lt;packages&gt;\g&lt;package_name&gt;|\g&lt;package_name&gt;\.\g&lt;packages&gt;)
+					(?&lt;package_name&gt;\g&lt;identifier&gt;)
+					(?&lt;identifier&gt;\w+)
+				)?
+				\g&lt;module_declaration&gt;
+				# ^\s*(module)\s+([^ ;]+?);
+			</string>
 			<key>name</key>
 			<string>meta.module.d</string>
 		</dict>
